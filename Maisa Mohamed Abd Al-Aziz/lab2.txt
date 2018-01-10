@@ -1,0 +1,89 @@
+        **********************************count-me-game***************************
+
+function CountMe(tag,object){
+   var tagnum=document.getElementsByTagName(tag);
+   var classnum=document.getElementsByClassName(object.class);
+   var id=document.getElementById(object.id);
+   if(id !=null){
+      id=true;
+   }else{
+      id=false;
+   }
+   var numberofname=document.getElementsByName(object.name);
+
+   var obj={
+        All:tagnum.length,
+        Class:classnum.length,
+        Id:id,
+        Name:numberofname.length 
+    };
+  return obj;
+}
+
+         **************************ready-steady-go-game*********************
+
+
+function ready(num){
+   var img=document.getElementsByTagName('img');
+   if(num===1){   
+      img[0].src="img/red.png"; 
+      img[1].src="img/gray.png";
+      img[2].src="img/gray.png";
+   }else if (num===2){
+      img[0].src="img/gray.png"; 
+      img[1].src="img/orange.png"; 
+      img[2].src="img/gray.png";
+   }else if (num===3){
+      img[0].src="img/gray.png"; 
+      img[1].src="img/gray.png";
+      img[2].src="img/green.png"; 
+   } 
+}
+
+
+            ***************************make-me-stylish*********************
+
+
+function stylish(tag,obj){
+   var tags =document.getElementsByTagName(tag);
+   var col=obj.color;
+   var bg=obj.background;
+   for(i=0;i<tags.length;i++){
+      tags[i].style.color= col;
+      tags[i].style.background=bg;
+    }
+
+}
+
+           **************************make-me-live**************************
+
+
+function live(){
+    var parent = document.body;
+    var child=document.body.children;
+
+    for(i=0;i<child.length-1;i++){
+       var content=child[i].textContent;
+       var text="";
+       var count=4;
+       while(content[count]!=='.'){
+          text+=content[count];
+          count++;
+         }     
+
+       var  anc= document.createElement('a');
+       parent.replaceChild(anc,child[i]);
+       var content1 = document.createTextNode(text);
+       child[i].appendChild(content1);   
+       var href = document.createAttribute('href');
+       href.value = "https://"+content; 
+       child[i].setAttributeNode(href);
+       child[i].style.display="block";
+
+
+    }
+}
+live();
+
+
+        

@@ -1,0 +1,191 @@
+          ****************************ready-go*************************
+
+var num=1;
+function ready(){
+    if(num>=4){
+        num=1;
+    }
+    var img=document.getElementsByTagName('img');
+    if(num===1){   
+       img[0].src="img/red.png"; 
+       img[1].src="img/gray.png";
+       img[2].src="img/gray.png";
+
+    }else if (num===2){
+       img[0].src="img/gray.png"; 
+       img[1].src="img/orange.png"; 
+       img[2].src="img/gray.png";
+    }else if (num===3){
+       img[0].src="img/gray.png";
+       img[1].src="img/gray.png";
+       img[2].src="img/green.png"; 
+    } 
+    num++;
+}
+setInterval(ready,1000);
+
+
+           ****************************slide-show*************************
+
+var tags=document.getElementsByTagName("button");
+var img=document.getElementsByTagName('img');
+var array=["img/red.png","img/orange.png","img/green.png"];
+var flag=0;
+var fl=array.length-1;
+var id;
+
+tags[0].addEventListener('click',back);
+tags[1].addEventListener('click',play);
+tags[2].addEventListener('click',stop);
+tags[3].addEventListener('click',next);
+
+function back(){
+     if(flag>=array.length){
+         flag=0;
+      }
+    img[0].src=array[flag++]; 
+
+}
+function next(){
+     if(fl<0){
+         fl=array.length-1;
+      }
+    img[0].src=array[fl--]; 
+
+}
+function play(){  
+   id=setInterval(ready,1000);
+   function ready(){
+      if(fl<0){
+         fl=array.length-1;
+       }
+    img[0].src=array[fl--]; 
+    }
+}
+
+function stop(){
+clearInterval(id);
+}
+
+
+          *****************************form***********************
+
+var submit= document.getElementById("saveForm");
+var reset= document.getElementById("resetForm");
+var name=document.getElementById("element_1");
+var email=document.getElementById("element_2");
+var password=document.getElementById("element_3");
+var gender=document.getElementsByName("element_4");
+var sport=document.getElementsByClassName("element checkbox");
+var country=document.getElementById("element_6");
+
+var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; 
+var passwordformat=/^(?=.*[A-Za-z])[A-Za-z\d]{8,}/i
+submit.addEventListener('click',valid);
+reset.addEventListener('click',clear);
+
+
+
+
+function valid(e){
+    var count=0;   
+    var errors=document.getElementsByClassName("errors");
+    var error=document.getElementById("error-messages");
+    while (error.firstChild) {
+        error.removeChild(error.firstChild);
+       } 
+    checked(sport);
+
+    if(document.getElementById("element_1").value==""){
+      document.getElementById("element_1").focus();
+      errors[0].style.display="block";      
+      var paragraph = document.createElement("p");
+      error.appendChild(paragraph);
+      var content = document.createTextNode("the Name is required"); 
+      paragraph.appendChild(content);
+      e.preventDefault();
+      count++;
+      
+    }
+
+    if(!email.value.match(mailformat)){
+       document.getElementById("element_2").focus()
+       errors[0].style.display="block";      
+       var paragraph = document.createElement("p");
+       error.appendChild(paragraph);
+       var content = document.createTextNode("Email is not valid"); 
+       paragraph.appendChild(content); 
+       e.preventDefault();
+       count++;      
+
+     }
+    if(!password.value.match(passwordformat)){
+       document.getElementById("element_3").focus();
+       errors[0].style.display="block";      
+       var paragraph = document.createElement("p");
+       error.appendChild(paragraph);
+       var content = document.createTextNode("Password must be 8 chars at least."); 
+       paragraph.appendChild(content);
+       e.preventDefault();
+       count++;
+    }
+
+    
+
+    if(check<2){
+       errors[0].style.display="block";      
+       var paragraph = document.createElement("p");
+       error.appendChild(paragraph);
+       var content = document.createTextNode("Please select at least two sports"); 
+       paragraph.appendChild(content);
+       e.preventDefault();
+       count++;
+       
+      }
+
+    if(!(gender[0].checked||gender[1].checked)){
+       errors[0].style.display="blocke";      
+       var paragraph = document.createElement("p");
+       error.appendChild(paragraph);
+       var content = document.createTextNode("Please select your gender"); 
+       paragraph.appendChild(content);
+       e.preventDefault();
+       count++;
+      
+      }
+   
+    if(country.value==""){
+       errors[0].style.display="block";      
+       var paragraph = document.createElement("p");
+       error.appendChild(paragraph);
+       var content = document.createTextNode("Please select your country"); 
+       paragraph.appendChild(content);
+       e.preventDefault();
+       count++; 
+     }
+   if(count===0){
+    errors[0].style.display="none"; 
+    alert("Successful Submit");
+
+    }
+    
+}
+
+var check=0;
+function checked(sport){  
+  for(i=0;i<sport.length;i++){
+    if(sport[i].checked){
+       check++;
+    }
+  } 
+}
+
+function clear(){
+   var errors=document.getElementsByClassName("errors");
+   name.value="";
+   email.value="";
+   password.value="";
+   country.value="";
+}
+
+
